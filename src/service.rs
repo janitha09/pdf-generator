@@ -18,6 +18,7 @@ const NO_WKHTMLTOPDF_ERR: &str = "wkhtmltopdf tool is not found. Please install 
 
 type PdfPath = String;
 
+#[derive(Debug)]
 pub struct ReportService {
     template_engine: TemplateEngine,
     work_dir: String,

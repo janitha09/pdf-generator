@@ -6,15 +6,16 @@ extern crate serde;
 use std::collections::HashMap;
 use std::path::Path;
 
-use handlebars_ext::I18Helper;
+// use crate::handlebars_ext::I18Helper;
 
-use super::handlebars_ext::*;
+use crate::handlebars_ext::*;
 
 use self::handlebars::Handlebars;
 use self::ini::Ini;
 use self::ini::ini::Error as IError;
 use self::serde::ser::Serialize;
 
+#[derive(Debug)]
 pub struct TemplateEngine {
     handlebars: Handlebars
 }

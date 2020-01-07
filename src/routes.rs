@@ -6,7 +6,7 @@ use rocket::response::NamedFile;
 use rocket_contrib::json::Json;
 use rocket_contrib::json::JsonValue;
 
-use service::ReportService;
+use crate::service::ReportService;
 
 use self::rocket::State;
 use rocket::Rocket;
@@ -15,6 +15,11 @@ use rocket::Rocket;
 pub struct GetReport {
     template_name: String,
     user_params: JsonValue,
+}
+
+#[get("/hello")]
+pub fn hello() -> &'static str{
+    "Hello, World!"
 }
 
 #[post("/generate", format = "application/json", data = "<req>")]
@@ -31,8 +36,10 @@ pub fn generate_report(service: State<ReportService>, req: Json<GetReport>)
 pub fn mount_routes(service: ReportService) -> Rocket {
     rocket::ignite()
         .manage(service)
-        .mount(
-            "/api/v1",
-            routes![generate_report],
+        .mount("/api/v1",routes![generate_report],
         )
+}
+
+pub fn rocket() -> Rocket {
+    rocket::ignite().mount("/", routes![hello])
 }
