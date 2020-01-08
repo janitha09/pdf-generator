@@ -14,7 +14,7 @@ use super::templates::TemplateEngine;
 
 const USE_STDIN_MARKER: &str = "-";
 const WKHTMLTOPDF_CMD: &str = "wkhtmltopdf";
-const NO_WKHTMLTOPDF_ERR: &str = "wkhtmltopdf tool is not found. Please install it.";
+const NO_WKHTMLTOPDF_ERR: &str = "wkhtmltopdf tool was not found. Please install it.";
 
 type PdfPath = String;
 

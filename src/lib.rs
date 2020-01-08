@@ -12,4 +12,4 @@ extern crate serde_derive;
 pub mod service;
 pub mod routes;
 mod handlebars_ext;
-mod templates;
+pub mod templates;

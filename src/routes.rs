@@ -11,6 +11,9 @@ use crate::service::ReportService;
 use self::rocket::State;
 use rocket::Rocket;
 
+use rocket::Data;
+use std::io::Read;
+
 #[derive(Deserialize)]
 pub struct GetReport {
     template_name: String,
@@ -20,6 +23,14 @@ pub struct GetReport {
 #[get("/hello")]
 pub fn hello() -> &'static str{
     "Hello, World!"
+}
+// #[post("/hello",format="plain",data="<data>"]
+ #[post("/echo", format = "plain", data = "<name>")]
+pub fn say_hello(name: Data) -> String {
+    let mut stream = name.open();
+    let mut buffer = String::new();
+    stream.read_to_string(&mut buffer).expect("data read to stream");
+    buffer
 }
 
 #[post("/generate", format = "application/json", data = "<req>")]
@@ -42,4 +53,5 @@ pub fn mount_routes(service: ReportService) -> Rocket {
 
 pub fn rocket() -> Rocket {
     rocket::ignite().mount("/", routes![hello])
+    .mount("/", routes![say_hello])
 }

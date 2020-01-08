@@ -29,7 +29,7 @@ impl TemplateEngine {
         Ok(TemplateEngine { handlebars })
     }
 
-    fn init_template_engine() -> Result<Handlebars, TemplateError> {
+    pub fn init_template_engine() -> Result<Handlebars, TemplateError> {
         let mut handlebars = Handlebars::new();
         let path = Path::new("./templates");
         handlebars
